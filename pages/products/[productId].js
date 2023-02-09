@@ -78,7 +78,7 @@ const Product = ({ product }) => {
     <div className="container mt-7 w-5/6 mx-auto sm:px-4">
       <div className="container w-full sm:px-4" id="product-section">
         <div className="flex flex-wrap ">
-          <div className="md:w-1/2 pr-4 pl-4">
+          <div className="md:w-1/2 w-4/5 pr-4 pl-4 mx-auto">
             {product.photo !== undefined &&
               <Carousel emulateTouch={true} infiniteLoop={true} renderThumbs={() => product.photo.map((img, idx) => (
                 <div key={idx} className="w-full h-20 relative">
@@ -86,7 +86,7 @@ const Product = ({ product }) => {
                     src={img}
                     fill={true}
                     style={{objectFit: 'contain'}}
-                    sizes='(max-width: 600px) 100vw, 600px'
+                    sizes='(max-width: 600px) 80vw, 600px'
                     alt="logo"
                   ></Image>
                 </div>
