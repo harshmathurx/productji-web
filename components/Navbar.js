@@ -8,7 +8,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="relative flex max-w-full w-full flex-wrap items-center justify-between px-2 py-3 bg-[#007bff] mb-3">
+            <nav className="relative flex max-w-full w-full flex-wrap items-center justify-between px-2 py-3 bg-[#007bff]">
                 <div className="container max-w-full px-4 flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <Link

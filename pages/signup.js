@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useState } from 'react';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
@@ -20,13 +21,24 @@ const SignUp = () => {
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [terms, setTerms] = useState(false);
 
     const handleChange = name => event => {
         setUser({ ...user, [name]: event.target.value });
     }
 
+    const handleTerms = () => {
+        setTerms(!terms)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!terms) {
+            setError("Please accept the terms and conditions")
+            toast.dismiss()
+            toast.error("Please accept the terms and conditions")
+            return
+        }
         toast.dismiss()
         toast.info("Setting up your shop")
         await signup({ ...user })
@@ -38,6 +50,8 @@ const SignUp = () => {
                 }
                 else {
                     console.log(data);
+                    toast.success("Your shop is ready")
+                    toast.success("Please check your email for verification")
                     router.push('/');
                 }
             })
@@ -50,12 +64,12 @@ const SignUp = () => {
                 <title>Sign Up - ProductJi</title>
                 <meta property="og:title" content="Sign Up - ProductJi" />
                 <meta name="description" content="Sell your products on Productji, become a part of the ProductJi family" />
-                <meta property="og:description" content="Sell your products on Productji, become a part of the ProductJi family"  />
+                <meta property="og:description" content="Sell your products on Productji, become a part of the ProductJi family" />
                 <meta property="og:type" content="ecommerce" />
                 <meta property="og:site_name" content="ProductJi" />
             </Head>
             <Script src="https://kit.fontawesome.com/0c864d7e04.js" crossorigin="anonymous" />
-            <div className="flex justify-center items-center" style={{ backgroundColor: 'white' }}>
+            <div className="flex justify-center items-center bg-white h-full max-h-full">
                 <div className="lg:w-full pr-4 pl-4 xl:w-5/6">
                     <div className="">
                         <div className="flex-auto p-6 md:p-12">
@@ -72,10 +86,10 @@ const SignUp = () => {
                                 </div> */}
                                     <form className="mx-1 md:mx-6">
                                         <div className='text-base text-red-500 font-medium my-5'>
-                                            <div classNameName="alert alert-danger" style={{ display: error ? '' : "None " }}>
+                                            <div className="alert alert-danger" style={{ display: error ? '' : "None " }}>
                                                 {error}
                                             </div>
-                                            <div classNameName="alert alert-info" style={{ display: success ? '' : "None " }}>
+                                            <div className="alert alert-info" style={{ display: success ? '' : "None " }}>
                                                 New account is created. Please <Link href="/signin">sign in</Link>
                                             </div>
                                         </div>
@@ -89,7 +103,7 @@ const SignUp = () => {
                                         <div className="flex flex-row items-center mb-4 w-full">
                                             <div className="form-outline flex-fill mb-0 w-full">
                                                 <textarea rows={5} cols={40} required onChange={handleChange('about')} type="text" id="form3Example3c" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded" />
-                                                <label className="form-label" htmlFor="form3Example3c"><i class="fa-solid fa-align-left"></i> About the shop<span className='text-red-600'>*</span></label>
+                                                <label className="form-label" htmlFor="form3Example3c"><i className="fa-solid fa-align-left"></i> About the shop<span className='text-red-600'>*</span></label>
                                             </div>
                                         </div>
 
@@ -139,13 +153,14 @@ const SignUp = () => {
                                             <input required
                                                 className="absolute mt-1 -ml-6"
                                                 type="checkbox"
-                                                value=""
-                                                id="form2Example3c"
+                                                value=''
+                                                checked={terms}
+                                                onChange={handleTerms}
                                             />
-                                            <label className="text-gray-700 pl-6 mb-0" htmlFor="form2Example3">
-                                                I agree all statements in <a href="#!">Terms of service</a>
+                                            <label className="text-gray-700 mb-0" htmlFor="form2Example3">
+                                                I agree all statements in <a className='text-blue-600 underline'>Terms of service</a>
                                             </label>
-                                            {error && <div classNameName="alert alert-danger">
+                                            {error && <div className="alert alert-danger">
                                                 <p className=' text-base text-red-500 font-medium my-5'>Please fill in the details appropriately</p>
                                             </div>}
                                         </div>
@@ -156,7 +171,7 @@ const SignUp = () => {
                                     </form>
                                 </div>
                                 <div className="md:w-4/5 lg:w-1/2 pr-4 pl-4 xl:w-3/5 flex items-center order-1 lg:order-2">
-                                    <Image src="/signup.webp" className="max-w-full h-auto" alt="Sample image" width={500} height={500} />
+                                    <Image priority={true} src="/signup.webp" className="max-w-full h-auto" alt="Sample image" width={500} height={500} />
                                 </div>
                             </div>
                         </div>
