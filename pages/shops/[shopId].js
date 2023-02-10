@@ -53,7 +53,7 @@ const Shop = ({ shop, products }) => {
             <div className="">
                 <div className="container m-auto grid grid-cols-3">
                     <div className="flex justify-center items-center col-span-1">
-                        <Image class="rounded-circle img-fluid" alt={shop?.name} src="/placeholder.png" data-holder-rendered="true" width={200} height={200} />
+                        <Image class="rounded-circle img-fluid" priority={true} alt={shop?.name} src="/placeholder.png" data-holder-rendered="true" width={200} height={200} />
                     </div>
                     <div className="flex flex-col justify-center col-span-2">
                         <h1 className="text-2xl font-semibold">{shop?.name}</h1>

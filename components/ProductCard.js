@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
                     <div className='flex h-80 flex-col p-6 justify-between flex-wrap'>
                         {/* <ShowImage item={product} url="product" /> */}
                         <div className={styles.cardImage} >
-                            <Image src={product.photo[0]} alt={product.name} height={150} width={150} />
+                            <Image src={product.photo[0]} alt={product.name} priority={true} height={150} width={150} />
                         </div>
                         <div >
                             <h3 className='font-semibold'>{product.name.substring(0, 25) + "..."}</h3>

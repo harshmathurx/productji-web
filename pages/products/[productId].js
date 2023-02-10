@@ -175,7 +175,7 @@ const Product = ({ product }) => {
 
                   {/* {product.store.photo ? <img className="rounded-full max-w-full h-auto" alt="100x100" src={product.store.photo} data-holder-rendered="true" /> : <img className="rounded-full max-w-full h-auto" alt="100x100" src="https://cdn2.iconfinder.com/data/icons/facebook-ui-colored/48/JD-15-512.png" data-holder-rendered="true" />} */}
 
-                  <Image className="rounded-circle img-fluid" alt={product?.store?.name} src="/placeholder.png" data-holder-rendered="true" width={200} height={200} />
+                  <Image className="rounded-circle img-fluid" priority={true} alt={product?.store?.name} src="/placeholder.png" data-holder-rendered="true" width={200} height={200} />
 
                 </div>
                 <div className="md:w-3/4 pr-4 pl-4 sm:w-full flex flex-col">

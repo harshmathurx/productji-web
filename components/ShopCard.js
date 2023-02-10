@@ -16,7 +16,7 @@ const ShopCard = ({ shop }) => {
                     <div className={styles.cardBody}>
                         {/* <ShowImage item={product} url="product" /> */}
                         <div className='mb-3 flex justify-center rounded-full' >
-                            <Image src='/placeholder.png' alt={shop?.name} width={200} height={200} />
+                            <Image src='/placeholder.png' alt={shop?.name} priority={true} width={200} height={200} />
                             {/* (shop?.photo ? <Image src={shop?.photo} alt={shop?.name} width={200} height={200} /> : <Image src='/placeholder.png' alt={shop?.name} width={200} height={200} />) */}
                         </div>
                         <div >
