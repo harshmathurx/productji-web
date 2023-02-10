@@ -6,6 +6,14 @@ import Head from 'next/head'
 export async function getServerSideProps(context) {
   let products = await getProducts()
   let shops = await getAllStores();
+  if (products == undefined && shops == undefined) {
+    return {
+      props: {
+        products: [],
+        shops: []
+      }
+    }
+  }
   if (products != undefined && shops != undefined) {
     products = JSON?.parse(JSON?.stringify(products));
     shops = JSON.parse(JSON.stringify(shops));
@@ -70,7 +78,7 @@ export default function Home({ products, shops }) {
         </div>
         <div>
           <h1 className='text-4xl font-semibold my-5'>Featured Shops</h1>
-          {(shops?.length > 0 ? (
+          {shops && (shops?.length > 0 ? (
             <div className={styles.container}>
               {shops?.map((shop) => {
                 return <ShopCard key={shop._id} shop={shop} />
