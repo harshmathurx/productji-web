@@ -47,7 +47,7 @@ export async function getServerSideProps(context) {
 
 export default function Home({ products, shops }) {
   const styles = {
-    container: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6',
+    container: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5',
     errorContainer: 'flex flex-col items-center justify-center h-screen'
   }
 

@@ -2,7 +2,7 @@ import ShopCard from "@/components/ShopCard";
 import { getAllStores } from "@/utils/apiCalls";
 
 const styles = {
-    container: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6',
+    container: 'container my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5',
     errorContainer: 'flex flex-col items-center justify-center h-screen'
 }
 
