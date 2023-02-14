@@ -14,6 +14,22 @@ export const getProducts = () => {
     })
 }
 
+export const activateEmail = (token) => {
+    
+    return fetch(`${API}/email-activate/${token}`,{
+        method: "GET"
+    })
+    .then(response => {
+        if(response.error){
+            console.log(response.error)
+        }
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
 export const search = (params) => {
     const query = queryString.stringify(params)
     return fetch(`${API}/products/search?${query}`,{

@@ -42,16 +42,23 @@ const SignUp = () => {
         toast.info("Setting up your shop")
         await signup({ ...user })
             .then(data => {
-                if (data.error) {
-                    setError(data.error)
-                    toast.dismiss()
-                    toast.error(data.error)
+                if(data){
+                    if (data.error) {
+                        setError(data.error)
+                        toast.dismiss()
+                        toast.error(data.error)
+                    }
+                    else {
+                        console.log(data);
+                        toast.success("Your shop is ready")
+                        toast.success("Please check your email for verification")
+                        router.push('/');
+                    }
                 }
-                else {
-                    console.log(data);
-                    toast.success("Your shop is ready")
-                    toast.success("Please check your email for verification")
-                    router.push('/');
+                else{
+                    setError("Something went wrong")
+                    toast.dismiss()
+                    toast.error("Something went wrong")
                 }
             })
     }
