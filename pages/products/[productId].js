@@ -113,7 +113,7 @@ const Product = ({ product }) => {
             )}</h6>
             {/* <p>Created {moment(product?.createdAt).fromNow()}</p> */}
 
-            <Link href={product.link} target="_blank">
+            <Link href={product.link ? product.link : "#"} target="_blank">
               <button className='inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-yellow-400 text-black hover:bg-yellow-500 mb-4 mt-4' style={{ borderRadius: '5px' }}>Buy from shop</button>
             </Link>
             <div >

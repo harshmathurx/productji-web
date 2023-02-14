@@ -1,4 +1,5 @@
 import ProductCard from "@/components/ProductCard";
+import StructuredData from "@/components/StructuredData";
 import { getProductsByShop, getShop } from "@/utils/apiCalls";
 import Head from "next/head";
 import Image from "next/image";
@@ -62,7 +63,7 @@ const Shop = ({ shop, products }) => {
                         <p>{shop?.phone}</p>
                         <p>{shop?.openTiming}</p>
                         <p>{shop?.address}</p>
-                        <Link className="text-[#0000EE]" href={shop?.link} target="_blank">{shop?.link}</Link>
+                        {shop?.link && (<Link className="text-[#0000EE]" href={shop?.link} target="_blank">{shop?.link}</Link>)}
                     </div>
                 </div>
 
@@ -80,6 +81,7 @@ const Shop = ({ shop, products }) => {
                     ))}
                 </div>
             </div>
+            <StructuredData data={data} />
         </>
     )
 }
