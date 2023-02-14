@@ -60,7 +60,7 @@ const ActivateEmail = () => {
                 <Image src="/activation_success.svg" width={300} height={300} alt="" />
                 <h1 className="text-3xl font-bold mt-5">Your email has been activated</h1>
                 <h2 className="text-2xl font-bold mt-5">{`Let's start listing your products`}</h2>
-                <Link href={store_panel} target="_blank">
+                <Link href={store_panel ? store_panel : "https://admin-panel-1zr.pages.dev"} target="_blank">
                     <button className="bg-blue-700 text-white px-5 py-2 rounded-xl mt-5">Visit Store Panel</button>
                 </Link>
             </div>}
