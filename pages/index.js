@@ -1,7 +1,7 @@
 import ProductCard from '@/components/ProductCard';
 import ShopCard from '@/components/ShopCard';
 import { getAllStores, getProducts } from '@/utils/apiCalls';
-import Head from 'next/head'
+import Head from 'next/head';
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 

@@ -1,14 +1,14 @@
 import StructuredData from "@/components/StructuredData";
 import { getProductById } from "@/utils/apiCalls";
+import { EmailIcon, EmailShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "next-share";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
-import { RWebShare } from "react-web-share"
-import { EmailIcon, EmailShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "next-share";
+import { RWebShare } from "react-web-share";
 
 
 export async function getServerSideProps(context) {
