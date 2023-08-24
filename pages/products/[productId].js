@@ -12,21 +12,14 @@ import { EmailIcon, EmailShareButton, TelegramIcon, TelegramShareButton, Twitter
 
 
 export async function getServerSideProps(context) {
-  let product = await getProductById(context.params.productId);
-  if (product != undefined) {
-    product = JSON.parse(JSON.stringify(product));
-
-    return {
-      props: {
-        product
-      }
-    }
+  let product = {}
+  let productRes = await getProductById(context.params.productId);
+  if (productRes) {
+    product = productRes
   }
-  else {
-    return {
-      props: {
-        product: {}
-      }
+  return {
+    props: {
+      product: product
     }
   }
 }

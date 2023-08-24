@@ -7,22 +7,20 @@ const styles = {
 }
 
 export async function getServerSideProps(context) {
-    let shops = await getAllStores();
-    if (shops != undefined) {
-        shops = JSON.parse(JSON.stringify(shops));
-
-        return {
-            props: {
-                shops
-            }
-        }
+    let shops = [];
+  
+    const resShops = await getAllStores()
+    if(resShops){
+      shops = resShops
     }
-    else {
-        return {
-            props: {
-                shops: []
-            }
-        }
+    else{
+      console.log("couldn't fetch shops")
+    }
+  
+    return {
+      props: {
+        shops: shops
+      }
     }
 }
 

@@ -2,20 +2,15 @@ import ProductCard from "@/components/ProductCard";
 import { search } from "@/utils/apiCalls";
 
 export async function getServerSideProps(context) {
+    let results = []
     const q = context.query.search
-    let response = await search({ search: q })
+    const response = await search({ search: q })
     if (response) {
-        return {
-            props: {
-                results: response
-            }
-        }
+        results = response
     }
-    else {
-        return {
-            props: {
-                results: []
-            }
+    return {
+        props: {
+            results: results
         }
     }
 }
@@ -24,7 +19,6 @@ const styles = {
     container: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6',
     errorContainer: 'flex flex-col items-center justify-center h-screen'
 }
-
 
 const SearchResults = ({ results }) => {
     const searchMessage = (results = []) => {

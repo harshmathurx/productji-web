@@ -3,47 +3,32 @@ import ShopCard from '@/components/ShopCard';
 import { getAllStores, getProducts } from '@/utils/apiCalls';
 import Head from 'next/head'
 
-export async function getServerSideProps(context) {
-  let products = await getProducts()
-  let shops = await getAllStores();
-  if (products == undefined && shops == undefined) {
-    return {
-      props: {
-        products: [],
-        shops: []
-      }
-    }
-  }
-  if (products != undefined && shops != undefined) {
-    products = JSON?.parse(JSON?.stringify(products));
-    shops = JSON.parse(JSON.stringify(shops));
+const API = process.env.NEXT_PUBLIC_API_URL;
 
-    return {
-      props: {
-        products,
-        shops
-      }
-    }
+export async function getServerSideProps(context) {
+  let products = [];
+  let shops = [];
+
+  const resProducts = await getProducts()
+  if(resProducts){
+    products = resProducts
   }
-  if (products == undefined) {
-    return {
-      props: {
-        products: [],
-        shops
-      }
-    }
+  else{
+    console.log("couldn't fetch products")
   }
-  if (shops == undefined) {
-    return {
-      props: {
-        shops: [],
-        products
-      }
-    }
+
+  const resShops = await getAllStores()
+  if(resShops){
+    shops = resShops
   }
+  else{
+    console.log("couldn't fetch shops")
+  }
+
   return {
     props: {
-      
+      products: products,
+      shops: shops
     }
   }
 }

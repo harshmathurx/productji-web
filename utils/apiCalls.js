@@ -2,7 +2,7 @@ const API = process.env.NEXT_PUBLIC_API_URL;
 import queryString from "query-string"
 
 
-export const getProducts = () => {
+export const getProducts = async () => {
     return fetch(`${API}/products`,{
         method: "GET",
     })
@@ -14,7 +14,7 @@ export const getProducts = () => {
     })
 }
 
-export const activateEmail = (token) => {
+export const activateEmail = async (token) => {
     
     return fetch(`${API}/email-activate/${token}`,{
         method: "GET"
@@ -30,7 +30,7 @@ export const activateEmail = (token) => {
     })
 }
 
-export const search = (params) => {
+export const search = async (params) => {
     const query = queryString.stringify(params)
     return fetch(`${API}/products/search?${query}`,{
         method: "GET"
@@ -43,7 +43,7 @@ export const search = (params) => {
     })
 }
 
-export const getProductById = (productId) => {
+export const getProductById = async (productId) => {
     return fetch(`${API}/product/find/${productId}`,{
         method: "GET"
     })
@@ -55,7 +55,7 @@ export const getProductById = (productId) => {
     })
 }
 
-export const getAllStores = () => {
+export const getAllStores = async () => {
     return fetch(`${API}/stores`,{
         method: "GET"
     })
@@ -67,7 +67,7 @@ export const getAllStores = () => {
     })
 }
 
-export const getShop = (shopId) => {
+export const getShop = async (shopId) => {
     return fetch(`${API}/stores/${shopId}`,{
         method: "GET"
     })
@@ -79,7 +79,7 @@ export const getShop = (shopId) => {
     })
 }
 
-export const getProductsByShop = (shopId) => {
+export const getProductsByShop = async (shopId) => {
     return fetch(`${API}/products/${shopId}`,{
         method: "GET"
     })
@@ -91,7 +91,7 @@ export const getProductsByShop = (shopId) => {
     })
 }
 
-export const signup = (user) => {
+export const signup = async (user) => {
     // console.log(name,email,password)
     return fetch(`${API}/signup`,{
         method: "POST",

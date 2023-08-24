@@ -10,17 +10,19 @@ const styles = {
     errorContainer: 'flex flex-col items-center justify-center h-screen'
 }
 
-// TODO: ERROR HANDLING YET TO BE IMPLEMENTED
 export async function getServerSideProps(context) {
-    let shop = await getShop(context.params.shopId);
-    let products = await getProductsByShop(context.params.shopId);
-    shop = JSON.parse(JSON.stringify(shop));
-    products = JSON.parse(JSON.stringify(products));
+    let shop = {}
+    let shopRes = await getShop(context.params.shopId);
+    let products = []
+    let productsRes = await getProductsByShop(context.params.shopId);
+
+    if(shopRes) shop = shopRes
+    if(productsRes) products = productsRes
 
     return {
         props: {
-            shop,
-            products
+            shop: shop,
+            products: products
         }
     }
 }
