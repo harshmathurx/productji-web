@@ -10,8 +10,8 @@ const styles = {
 
 const ShopCard = ({ shop }) => {
     return (
-        <Link href={`/shops/${shop._id}`} style={{ color: "black", textDecoration: "none" }}>
-            <div className={styles.cardContainer}>
+        <div className={styles.cardContainer}>
+            <Link href={`/shops/${shop._id}`} style={{ color: "black", textDecoration: "none" }}>
                 <div className={styles.card}>
                     <div className={styles.cardBody}>
                         {/* <ShowImage item={product} url="product" /> */}
@@ -25,8 +25,8 @@ const ShopCard = ({ shop }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
         // </div>
     )
 }

@@ -1,6 +1,9 @@
 import ProductCard from "@/components/ProductCard";
 import StructuredData from "@/components/StructuredData";
+import Product from "@/utils/ProductSchema";
+import Store from "@/utils/StoreSchema";
 import { getProductsByShop, getShop } from "@/utils/apiCalls";
+import connectDB from "@/utils/connectDB";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,13 +14,18 @@ const styles = {
 }
 
 export async function getServerSideProps(context) {
-    let shop = {}
-    let shopRes = await getShop(context.params.shopId);
-    let products = []
-    let productsRes = await getProductsByShop(context.params.shopId);
 
-    if(shopRes) shop = shopRes
-    if(productsRes) products = productsRes
+    await connectDB()
+
+    let shop = {}
+    let products = []
+    let shopId = context.params.shopId
+
+    shop = await Store.findById(shopId).select(['-hashed_password', '-salt', '-isSubscribed'])
+    shop = JSON.parse(JSON.stringify(shop))
+
+    products = await Product.find({ store: shopId })
+    products = JSON.parse(JSON.stringify(products))
 
     return {
         props: {

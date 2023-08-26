@@ -1,30 +1,36 @@
 import ProductCard from '@/components/ProductCard';
 import ShopCard from '@/components/ShopCard';
-import { getAllStores, getProducts } from '@/utils/apiCalls';
+import Product from '@/utils/ProductSchema';
+import Store from '@/utils/StoreSchema';
+import connectDB from '@/utils/connectDB';
 import Head from 'next/head';
 
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getServerSideProps(context) {
-  let products = [];
+  await connectDB();
+
+  // let order = req.query.order ? req.query.order : 'desc'
+  // let sortBy = req.query.sortBy ? req.query.sortBy : 'createdAt'
+  let order = 'desc'
+  let sortBy = 'createdAt'
+
+  let products = []
   let shops = [];
 
-  const resProducts = await getProducts()
-  if(resProducts){
-    products = resProducts
-  }
-  else{
-    console.log("couldn't fetch products")
-  }
+  products = await Product.find().populate("store").sort([[sortBy, order]])
+  products = products.filter(product => { return product.store.isSubscribed == true });
+  products.map(product => {
+    product.store.hashed_password = undefined
+    product.store.salt = undefined
+    product.store.expiresAt = undefined
+    product.store.email = undefined
+  })
 
-  const resShops = await getAllStores()
-  if(resShops){
-    shops = resShops
-  }
-  else{
-    console.log("couldn't fetch shops")
-  }
+  shops = await Store.find().select(['-hashed_password','-email','-salt','-verified','-expiresAt'])
 
+  products = JSON.parse(JSON.stringify(products));
+  shops = JSON.parse(JSON.stringify(shops));
   return {
     props: {
       products: products,

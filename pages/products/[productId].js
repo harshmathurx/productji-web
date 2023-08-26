@@ -1,5 +1,5 @@
 import StructuredData from "@/components/StructuredData";
-import { getProductById } from "@/utils/apiCalls";
+import connectDB from "@/utils/connectDB";
 import { EmailIcon, EmailShareButton, TelegramIcon, TelegramShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "next-share";
 import Head from "next/head";
 import Image from "next/image";
@@ -8,15 +8,28 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Product from '@/utils/ProductSchema';
 import { RWebShare } from "react-web-share";
 
 
 export async function getServerSideProps(context) {
+
+  let productId = context.params.productId
+
+  await connectDB()
+
   let product = {}
-  let productRes = await getProductById(context.params.productId);
-  if (productRes) {
-    product = productRes
+  product = await Product.findById(productId).populate("store")
+
+  if (product.store) {
+    product.store.hashed_password = undefined
+    product.store.salt = undefined
+    product.store.expiresAt = undefined
+    product.store.email = undefined
   }
+
+  product = JSON.parse(JSON.stringify(product));
+
   return {
     props: {
       product: product
@@ -24,8 +37,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-
-const Product = ({ product }) => {
+const ProductPage = ({ product }) => {
 
   const origin = process.env.NEXT_PUBLIC_WEBSITE_HOST
   const productLink = `${origin}/products/${product?._id}`
@@ -78,9 +90,10 @@ const Product = ({ product }) => {
                   <Image
                     src={img}
                     fill={true}
-                    style={{objectFit: 'contain'}}
+                    style={{ objectFit: 'contain' }}
                     sizes='(max-width: 600px) 80vw, 600px'
                     alt="logo"
+                    priority={true}
                   ></Image>
                 </div>
               ))}>
@@ -194,4 +207,4 @@ const Product = ({ product }) => {
       </div>
     ))
 }
-export default Product
+export default ProductPage

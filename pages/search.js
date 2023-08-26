@@ -1,13 +1,16 @@
 import ProductCard from "@/components/ProductCard";
-import { search } from "@/utils/apiCalls";
+import Product from "@/utils/ProductSchema";
 
 export async function getServerSideProps(context) {
     let results = []
+
     const q = context.query.search
-    const response = await search({ search: q })
-    if (response) {
-        results = response
-    }
+    let regex = new RegExp(q, 'i');
+
+    results = await Product.find({ $and: [{ $or: [{ name: regex }, { description: regex }] }] })
+
+    results = JSON.parse(JSON.stringify(results))
+
     return {
         props: {
             results: results
